@@ -85,18 +85,26 @@
                                 \vspace{0.55in plus 0.15in minus 0.1in}
                                 {\singlespacing
                                         DISSERTATION COMMITTEE\\[0.2in]
-                                        \ifx\@chair\@empty\else
-                                                CHAIR\\
-                                                \MakeUppercase{\@chair}\\[0.1in]
-                                        \fi
-                                        \ifx\@cochair\@empty\else
-                                                CO-CHAIR\\
-                                                \MakeUppercase{\@cochair}\\[0.1in]
-                                        \fi
+                                        \begin{minipage}[t]{0.45\linewidth}
+                                                \raggedright
+                                                \ifx\@chair\@empty\else
+                                                        CHAIR\\
+                                                        \MakeUppercase{\@chair}\\[0.1in]
+                                                \fi
+                                                \ifx\@cochair\@empty\else
+                                                        CO-CHAIR\\
+                                                        \MakeUppercase{\@cochair}\\[0.1in]
+                                                \fi
+                                        \end{minipage}%
                                         \ifx\@committeeMembers\@empty\else
-                                                COMMITTEE MEMBERS\\
-                                                \@committeeMembers\\[0.1in]
+                                                \hfill
+                                                \begin{minipage}[t]{0.45\linewidth}
+                                                        \raggedright
+                                                        COMMITTEE MEMBERS\\
+                                                        \@committeeMembers\\[0.1in]
+                                                \end{minipage}%
                                         \fi
+                                        \\[0.1in]
                                 }
                                 \vspace{0.4in plus 0.1in minus 0.1in}
                         \else
