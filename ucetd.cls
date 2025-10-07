@@ -61,6 +61,12 @@
 \let\@chair\@empty
 \let\@cochair\@empty
 \let\@committeeMembers\@empty
+\gdef\@university{The University of Chicago}
+\gdef\@major{}
+\gdef\@location{CHICAGO, ILLINOIS}
+\gdef\@department{}
+\gdef\@division{}
+\gdef\@degree{}
 
 % UC ETD title page format
 \newcommand{\etdTitlePage} {
@@ -68,49 +74,50 @@
         \begin{titlepage}
                 \begin{center}
                         \rule{0in}{0.45in} % Artificial extra [old=0.95in] margin. Why not vspace?
-                        THE UNIVERSITY OF CHICAGO\\
+                        \MakeUppercase{\@university}\\
                         \vspace{0.7in plus 0.2in minus 0.1in}
                         \MakeUppercase{\@title}\\
                         \vspace{0.9in plus 0.15in minus 0.1in}
-                        A DISSERTATION SUBMITTED TO\\
-                        THE FACULTY OF THE DIVISION OF THE \MakeUppercase{\@division}\\
-                        IN CANDIDACY FOR THE DEGREE OF\\
-                        \MakeUppercase{\@degree}\\
+                        dissertation proposal submitted to the Graduate Council of\\
+                        \@university\\
+                        in partial fulfillment\\
+                        of the requirements for the degree of\\
+                        \@degree\\
                         \ \\
-                        DEPARTMENT OF \MakeUppercase{\@department}\\
+                        \ifx\@major\@empty
+                                \ifx\@department\@empty
+                                \else
+                                        with a Major in \@department\\
+                                \fi
+                        \else
+                                with a Major in \@major\\
+                        \fi
                         \vspace{0.85in plus 0.15in minus 0.1in}
                         BY\\
                         \MakeUppercase{\@author}\\
                         \if@committeeinfo
                                 \vspace{0.55in plus 0.15in minus 0.1in}
                                 {\singlespacing
-                                        DISSERTATION COMMITTEE\\[0.2in]
-                                        \begin{minipage}[t]{0.45\linewidth}
+                                        \begin{minipage}{\linewidth}
                                                 \raggedright
+                                                Committee Members:\\
                                                 \ifx\@chair\@empty\else
-                                                        CHAIR\\
-                                                        \MakeUppercase{\@chair}\\[0.1in]
+                                                        \@chair, Chair\\
                                                 \fi
                                                 \ifx\@cochair\@empty\else
-                                                        CO-CHAIR\\
-                                                        \MakeUppercase{\@cochair}\\[0.1in]
+                                                        \@cochair, Co-Chair\\
                                                 \fi
-                                        \end{minipage}%
-                                        \ifx\@committeeMembers\@empty\else
-                                                \hfill
-                                                \begin{minipage}[t]{0.45\linewidth}
-                                                        \raggedright
-                                                        COMMITTEE MEMBERS\\
-                                                        \@committeeMembers\\[0.1in]
-                                                \end{minipage}%
-                                        \fi
+                                                \ifx\@committeeMembers\@empty\else
+                                                        \@committeeMembers
+                                                \fi
+                                        \end{minipage}
                                         \\[0.1in]
                                 }
                                 \vspace{0.4in plus 0.1in minus 0.1in}
                         \else
                                 \vspace{0.8in}
                         \fi
-                        CHICAGO, ILLINOIS\\
+                        \@location\\
                         \MakeUppercase{\@date}
                         \vspace*{0.35in plus 0.1in}
                 \end{center}
@@ -247,9 +254,12 @@
 % Basic information
 \renewcommand{\title}[1]{\gdef\@title{#1}}
 \renewcommand{\author}[1]{\gdef\@author{#1}}
+\newcommand{\university}[1]{\gdef\@university{#1}}
 \newcommand{\department}[1]{\gdef\@department{#1}}
 \newcommand{\division}[1]{\gdef\@division{#1}}
 \newcommand{\degree}[1]{\gdef\@degree{#1}}
+\newcommand{\major}[1]{\gdef\@major{#1}}
+\newcommand{\location}[1]{\gdef\@location{#1}}
 \renewcommand{\date}[1]{\gdef\@date{#1}}
 
 % Dissertation committee information
@@ -258,9 +268,9 @@
 \newcommand{\committeeMember}[1]{%
         \@committeeinfotrue
         \ifx\@committeeMembers\@empty
-                \gdef\@committeeMembers{\MakeUppercase{#1}}%
+                \gdef\@committeeMembers{#1}%
         \else
-                \g@addto@macro\@committeeMembers{\\\MakeUppercase{#1}}%
+                \g@addto@macro\@committeeMembers{\\#1}%
         \fi
 }
 \newcommand{\committeeMembers}[1]{%
