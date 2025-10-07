@@ -67,42 +67,44 @@
         \hypersetup{pageanchor=false}
         \begin{titlepage}
                 \begin{center}
-                        \rule{0in}{0.55in} % Artificial extra [old=0.95in] margin. Why not vspace?
+                        \rule{0in}{0.45in} % Artificial extra [old=0.95in] margin. Why not vspace?
                         THE UNIVERSITY OF CHICAGO\\
-			\vspace{0.8in}
-			\MakeUppercase{\@title}\\
-			\vspace{1.0in}
-			A DISSERTATION SUBMITTED TO\\
-			THE FACULTY OF THE DIVISION OF THE \MakeUppercase{\@division}\\
-			IN CANDIDACY FOR THE DEGREE OF\\
-			\MakeUppercase{\@degree}\\
-			\ \\
-			DEPARTMENT OF \MakeUppercase{\@department}\\
-			\vspace{1.0in}
+                        \vspace{0.7in plus 0.2in minus 0.1in}
+                        \MakeUppercase{\@title}\\
+                        \vspace{0.9in plus 0.15in minus 0.1in}
+                        A DISSERTATION SUBMITTED TO\\
+                        THE FACULTY OF THE DIVISION OF THE \MakeUppercase{\@division}\\
+                        IN CANDIDACY FOR THE DEGREE OF\\
+                        \MakeUppercase{\@degree}\\
+                        \ \\
+                        DEPARTMENT OF \MakeUppercase{\@department}\\
+                        \vspace{0.85in plus 0.15in minus 0.1in}
                         BY\\
                         \MakeUppercase{\@author}\\
                         \if@committeeinfo
-                                \vspace{0.65in}
-                                DISSERTATION COMMITTEE\\[0.25in]
-                                \ifx\@chair\@empty\else
-                                        CHAIR\\
-                                        \MakeUppercase{\@chair}\\[0.15in]
-                                \fi
-                                \ifx\@cochair\@empty\else
-                                        CO-CHAIR\\
-                                        \MakeUppercase{\@cochair}\\[0.15in]
-                                \fi
-                                \ifx\@committeeMembers\@empty\else
-                                        COMMITTEE MEMBERS\\
-                                        \@committeeMembers\\[0.15in]
-                                \fi
-                                \vspace{0.5in}
+                                \vspace{0.55in plus 0.15in minus 0.1in}
+                                {\singlespacing
+                                        DISSERTATION COMMITTEE\\[0.2in]
+                                        \ifx\@chair\@empty\else
+                                                CHAIR\\
+                                                \MakeUppercase{\@chair}\\[0.1in]
+                                        \fi
+                                        \ifx\@cochair\@empty\else
+                                                CO-CHAIR\\
+                                                \MakeUppercase{\@cochair}\\[0.1in]
+                                        \fi
+                                        \ifx\@committeeMembers\@empty\else
+                                                COMMITTEE MEMBERS\\
+                                                \@committeeMembers\\[0.1in]
+                                        \fi
+                                }
+                                \vspace{0.4in plus 0.1in minus 0.1in}
                         \else
                                 \vspace{0.8in}
                         \fi
                         CHICAGO, ILLINOIS\\
                         \MakeUppercase{\@date}
-                        \vspace*{0.45in}
+                        \vspace*{0.35in plus 0.1in}
                 \end{center}
         \end{titlepage}
 	\hypersetup{pageanchor=true}
