@@ -55,13 +55,20 @@
 	\addtocounter{page}{1}
 }
 
+% Committee metadata defaults
+\newif\if@committeeinfo
+\@committeeinfofalse
+\let\@chair\@empty
+\let\@cochair\@empty
+\let\@committeeMembers\@empty
+
 % UC ETD title page format
 \newcommand{\etdTitlePage} {
-	\hypersetup{pageanchor=false}
-	\begin{titlepage}
-		\begin{center}
-			\rule{0in}{0.55in} % Artificial extra [old=0.95in] margin. Why not vspace?
-			THE UNIVERSITY OF CHICAGO\\
+        \hypersetup{pageanchor=false}
+        \begin{titlepage}
+                \begin{center}
+                        \rule{0in}{0.55in} % Artificial extra [old=0.95in] margin. Why not vspace?
+                        THE UNIVERSITY OF CHICAGO\\
 			\vspace{0.8in}
 			\MakeUppercase{\@title}\\
 			\vspace{1.0in}
@@ -72,14 +79,32 @@
 			\ \\
 			DEPARTMENT OF \MakeUppercase{\@department}\\
 			\vspace{1.0in}
-			BY\\
-			\MakeUppercase{\@author}\\
-			\vspace{0.8in}
-			CHICAGO, ILLINOIS\\
-			\MakeUppercase{\@date}
-			\vspace*{0.45in}
-		\end{center}
-	\end{titlepage}
+                        BY\\
+                        \MakeUppercase{\@author}\\
+                        \if@committeeinfo
+                                \vspace{0.65in}
+                                DISSERTATION COMMITTEE\\[0.25in]
+                                \ifx\@chair\@empty\else
+                                        CHAIR\\
+                                        \MakeUppercase{\@chair}\\[0.15in]
+                                \fi
+                                \ifx\@cochair\@empty\else
+                                        CO-CHAIR\\
+                                        \MakeUppercase{\@cochair}\\[0.15in]
+                                \fi
+                                \ifx\@committeeMembers\@empty\else
+                                        COMMITTEE MEMBERS\\
+                                        \@committeeMembers\\[0.15in]
+                                \fi
+                                \vspace{0.5in}
+                        \else
+                                \vspace{0.8in}
+                        \fi
+                        CHICAGO, ILLINOIS\\
+                        \MakeUppercase{\@date}
+                        \vspace*{0.45in}
+                \end{center}
+        \end{titlepage}
 	\hypersetup{pageanchor=true}
 }
 
@@ -216,6 +241,35 @@
 \newcommand{\division}[1]{\gdef\@division{#1}}
 \newcommand{\degree}[1]{\gdef\@degree{#1}}
 \renewcommand{\date}[1]{\gdef\@date{#1}}
+
+% Dissertation committee information
+\newcommand{\chair}[1]{\gdef\@chair{#1}\@committeeinfotrue}
+\newcommand{\cochair}[1]{\gdef\@cochair{#1}\@committeeinfotrue}
+\newcommand{\committeeMember}[1]{%
+        \@committeeinfotrue
+        \ifx\@committeeMembers\@empty
+                \gdef\@committeeMembers{\MakeUppercase{#1}}%
+        \else
+                \g@addto@macro\@committeeMembers{\\\MakeUppercase{#1}}%
+        \fi
+}
+\newcommand{\committeeMembers}[1]{%
+        \let\@committeeMembers\@empty
+        \def\@etdtmp{#1}%
+        \@for\@etdmember:=\@etdtmp\do{%
+                \edef\@etdmember{\expandafter\trim@spaces\expandafter{\@etdmember}}%
+                \ifx\@etdmember\@empty\else
+                        \committeeMember{\@etdmember}%
+                \fi
+        }%
+        \ifx\@committeeMembers\@empty
+                \ifx\@chair\@empty
+                        \ifx\@cochair\@empty
+                                \@committeeinfofalse
+                        \fi
+                \fi
+        \fi
+}
 
 % Output title page
 \renewcommand{\maketitle}{
