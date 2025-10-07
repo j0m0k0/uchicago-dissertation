@@ -21,3 +21,22 @@ Get Started
 3. Open `thesis_template.tex`, look around, and start writing!
 
 Alternatively, the template is also available from [Overleaf](https://www.overleaf.com/latex/templates/university-of-chicago-phd-dissertation-template/syvxgkqhvqqt).
+
+Committee Information
+---------------------
+
+The title page now supports committee details in addition to the existing
+metadata. Set the chair, optional co-chair, and committee members in your
+document preamble using the following commands:
+
+```tex
+\chair{Ada Lovelace}
+\cochair{Alan Turing} % optional
+\committeeMember{Grace Hopper}
+\committeeMember{Katherine Johnson}
+% or provide a comma-separated list in a single command
+\committeeMembers{Claude Shannon, Donald Knuth}
+```
+
+Any number of `\committeeMember` commands may be used. If `\cochair` is not
+provided it will be omitted from the title page automatically.
